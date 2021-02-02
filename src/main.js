@@ -29,6 +29,9 @@ new Vue({
       });
       keycloak.init({ pkceMethod: "S256" });
       this.$store.dispatch("storeKeycloak", keycloak);
+      keycloak.onAuthSuccess = () => {
+        this.$store.dispatch("axiosToken");
+      };
     }
   }
 }).$mount("#app");

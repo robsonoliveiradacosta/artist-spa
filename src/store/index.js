@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import client from "@/services/http";
 
 Vue.use(Vuex);
 
@@ -16,6 +17,11 @@ export default new Vuex.Store({
     },
     LOGOUT(state) {
       state.keycloak.logout();
+    },
+    SET_AXIOS_TOKEN(state) {
+      client.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${state.keycloak.token}`;
     }
   },
   actions: {
@@ -27,6 +33,9 @@ export default new Vuex.Store({
     },
     logout({ commit }) {
       commit("LOGOUT");
+    },
+    axiosToken({ commit }) {
+      commit("SET_AXIOS_TOKEN");
     }
   },
   getters: {
