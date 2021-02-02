@@ -1,11 +1,9 @@
 <template>
-  <div>Home Page</div>
+  <div>Album Page</div>
 </template>
 
 <script>
-export default {
-  name: "Home"
-};
+export default {};
 </script>
 
 <style></style>
