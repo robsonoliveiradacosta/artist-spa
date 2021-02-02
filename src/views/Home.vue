@@ -1,18 +1,33 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    Home Page
+    <b-button variant="outline-primary" @click="login" v-if="!isAuthenticated">
+      Login
+    </b-button>
+    <b-button variant="danger" @click="logout" v-if="isAuthenticated">
+      Logout
+    </b-button>
+    <h3 v-if="isAuthenticated">Usuário: {{ name }}</h3>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
-  components: {
-    HelloWorld
+  computed: {
+    ...mapGetters(["isAuthenticated", "name"])
+  },
+  methods: {
+    login() {
+      this.$store.dispatch("login");
+    },
+    logout() {
+      this.$store.dispatch("logout");
+    }
   }
 };
 </script>
+
+<style></style>
