@@ -9,6 +9,7 @@
         <b-navbar-nav>
           <b-nav-item to="/">Página Inicial</b-nav-item>
           <b-nav-item v-if="isAuthenticated" to="/album">Álbuns</b-nav-item>
+          <b-nav-item v-if="isAuthenticated" to="/artist">Artistas</b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">

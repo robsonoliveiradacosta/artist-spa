@@ -3,8 +3,9 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-import { BootstrapVue } from "bootstrap-vue";
+import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue";
 import Keycloak from "keycloak-js";
+import client from "./services/http";
 
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
@@ -12,6 +13,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 Vue.config.productionTip = false;
 
 Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
 
 new Vue({
   router,
@@ -32,6 +34,16 @@ new Vue({
       keycloak.onAuthSuccess = () => {
         this.$store.dispatch("axiosToken");
       };
+      client.interceptors.response.use(
+        response => response, // simply return the response
+        error => {
+          if (error.response.status === 401) {
+            // if we catch a 401 error
+            this.$store.dispatch("logout"); // force a log out
+          }
+          return Promise.reject(error); // reject the Promise, with the error as the reason
+        }
+      );
     }
   }
 }).$mount("#app");
