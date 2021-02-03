@@ -16,6 +16,11 @@
     </b-input-group>
 
     <b-table :items="albums" :fields="fields" caption-top>
+      <template v-slot:cell(actions)="row">
+        <router-link :to="{ name: 'AlbumDetail', params: { album: row.item } }">
+          Detalhar
+        </router-link>
+      </template>
       <template #table-caption>
         <span class="font-weight-bold display-4">Álbuns</span>
       </template>
