@@ -5,5 +5,14 @@ const resource = "/v1/albums";
 export default {
   getPaginated(size, page) {
     return client.get(`${resource}/page?size=${size}&page=${page}`);
+  },
+  create(data) {
+    return client.post(resource, data);
+  },
+  update(id, data) {
+    return client.put(`${resource}/${id}`, data);
+  },
+  delete(id) {
+    return client.delete(`${resource}/${id}`);
   }
 };
