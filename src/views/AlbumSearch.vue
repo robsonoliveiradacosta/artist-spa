@@ -5,7 +5,7 @@
         id="search"
         type="search"
         v-model="search"
-        placeholder="pesquisar..."
+        placeholder="nome do artista..."
       >
       </b-form-input>
       <b-input-group-append>
@@ -17,7 +17,12 @@
 
     <b-table :items="albums" :fields="fields" caption-top>
       <template v-slot:cell(actions)="row">
-        <router-link :to="{ name: 'AlbumDetail', params: { album: row.item } }">
+        <router-link
+          :to="{
+            name: 'AlbumDetail',
+            params: { album: row.item, search: search }
+          }"
+        >
           Detalhar
         </router-link>
       </template>
@@ -43,6 +48,12 @@ export default {
         { key: "actions", label: "" }
       ]
     };
+  },
+  created() {
+    if ("search" in this.$route.query) {
+      this.search = this.$route.query.search;
+      this.searchByArtistName();
+    }
   },
   methods: {
     searchByArtistName() {
