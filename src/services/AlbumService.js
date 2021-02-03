@@ -14,5 +14,8 @@ export default {
   },
   delete(id) {
     return client.delete(`${resource}/${id}`);
+  },
+  search(artistName) {
+    return client.get(`${resource}/search?artistName=${artistName}`);
   }
 };
