@@ -1,8 +1,20 @@
 <template>
   <div>
-    Album Page
+    <b-table
+      id="albumTable"
+      :fields="fields"
+      :items="albums"
+      :current-page="currentPage"
+      small
+    ></b-table>
 
-    {{ albums }}
+    <b-pagination
+      v-model="currentPage"
+      :total-rows="totalElements"
+      :per-page="perPage"
+      @change="pageChange"
+      aria-controls="albumTable"
+    ></b-pagination>
   </div>
 </template>
 
@@ -12,15 +24,32 @@ import AlbumService from "@/services/AlbumService";
 export default {
   data() {
     return {
-      albums: []
+      fields: [
+        { key: "id", label: "ID" },
+        { key: "name", label: "Nome" },
+        { key: "artist.name", label: "Artista" }
+      ],
+      albums: [],
+      perPage: 5,
+      currentPage: 1,
+      totalElements: 0
     };
   },
   created() {
-    this.getAll();
+    this.getPaginated();
   },
   methods: {
-    getAll() {
-      AlbumService.getAll().then(response => (this.albums = response.data));
+    pageChange(pageNumber) {
+      this.currentPage = pageNumber;
+      this.getPaginated();
+    },
+    getPaginated() {
+      AlbumService.getPaginated(this.perPage, this.currentPage - 1).then(
+        response => {
+          this.albums = response.data.content;
+          this.totalElements = response.data.totalElements;
+        }
+      );
     }
   }
 };
