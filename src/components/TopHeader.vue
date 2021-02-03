@@ -19,13 +19,6 @@
           <b-nav-text v-if="isAuthenticated" class="mr-3">
             {{ name }}
           </b-nav-text>
-          <b-button
-            variant="outline-success"
-            @click="login"
-            v-if="!isAuthenticated"
-          >
-            Login
-          </b-button>
           <b-button variant="danger" @click="logout" v-if="isAuthenticated">
             Logout
           </b-button>
@@ -36,17 +29,15 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 export default {
   name: "TopHeader",
-  computed: {
-    ...mapGetters(["isAuthenticated", "name"])
+  data() {
+    return {
+      isAuthenticated: this.$keycloak.authenticated,
+      name: this.$keycloak.tokenParsed.preferred_username
+    };
   },
   methods: {
-    login() {
-      this.$store.dispatch("login");
-    },
     logout() {
       this.$store.dispatch("logout");
     }

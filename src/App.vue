@@ -12,7 +12,7 @@
 
     <footer class="mt-3 bg-secondary py-3">
       <div class="container">
-        <span class="text-white">&copy; Artist SPA</span>
+        <span class="text-white">&copy; Artistas e Álbuns - SPA</span>
       </div>
     </footer>
   </div>

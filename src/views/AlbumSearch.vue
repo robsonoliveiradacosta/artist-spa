@@ -60,7 +60,7 @@ export default {
       AlbumService.search(this.search).then(response => {
         this.albums = response.data;
         if (!this.albums.length) {
-          Swal.fire("", "A pesquisa não retornou nenhum  Álbum.", "info");
+          Swal.fire("", "A pesquisa não retornou nenhum Álbum.", "info");
         }
       });
     }
