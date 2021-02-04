@@ -25,6 +25,15 @@
         >
           Detalhar
         </router-link>
+        |
+        <router-link
+          :to="{
+            name: 'AlbumCover',
+            params: { album: row.item, search: search }
+          }"
+        >
+          Capas
+        </router-link>
       </template>
       <template #table-caption>
         <span class="font-weight-bold display-4">Álbuns</span>

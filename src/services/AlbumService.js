@@ -17,5 +17,14 @@ export default {
   },
   search(artistName) {
     return client.get(`${resource}/search?artistName=${artistName}`);
+  },
+  findById(id) {
+    return client.get(`${resource}/${id}`);
+  },
+  addCover(id, data) {
+    return client.put(`${resource}/${id}/covers`, data);
+  },
+  removeCover(objectName) {
+    return client.delete(`${resource}/covers/${objectName}`);
   }
 };

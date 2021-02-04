@@ -27,6 +27,12 @@ const routes = [
     props: true
   },
   {
+    path: "/album-cover",
+    name: "AlbumCover",
+    component: () => import("../views/AlbumCover.vue"),
+    props: true
+  },
+  {
     path: "/artist",
     name: "Artist",
     component: () => import("../views/Artist.vue")
