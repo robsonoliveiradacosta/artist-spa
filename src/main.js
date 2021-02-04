@@ -42,7 +42,11 @@ keycloak
             error => {
               if (error.response.status === 401) {
                 // if we catch a 401 error
-                this.$store.dispatch("logout"); // force a log out
+                keycloak.logout(); // force a log out
+              }
+              if (error.response.status === 403) {
+                // if we catch a 403 error
+                this.$router.push("/");
               }
               return Promise.reject(error); // reject the Promise, with the error as the reason
             }

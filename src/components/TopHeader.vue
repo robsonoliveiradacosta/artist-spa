@@ -39,7 +39,10 @@ export default {
   },
   methods: {
     logout() {
-      this.$keycloak.logout();
+      let keycloakLogoutOptions = {
+        redirectUri: "http://localhost:8082"
+      };
+      this.$keycloak.logout(keycloakLogoutOptions);
     }
   }
 };
