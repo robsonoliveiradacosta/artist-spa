@@ -11,7 +11,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
 let initOptions = {
-  url: "http://localhost:8080/auth",
+  url: "http://keycloak:8080/auth",
   realm: "artist",
   clientId: "artist-spa",
   onLoad: "login-required"
