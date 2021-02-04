@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#">Artist SPA</b-navbar-brand>
+      <b-navbar-brand href="#">Artistas e Álbuns</b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     logout() {
-      this.$store.dispatch("logout");
+      this.$keycloak.logout();
     }
   }
 };

@@ -37,8 +37,6 @@ keycloak
         store,
         render: h => h(App),
         created() {
-          this.$store.dispatch("axiosToken");
-
           client.interceptors.response.use(
             response => response, // simply return the response
             error => {
@@ -80,3 +78,11 @@ keycloak
   .catch(() => {
     console.log("Authenticated Failed");
   });
+
+keycloak.onAuthSuccess = async function() {
+  client.defaults.headers.common["Authorization"] = `Bearer ${keycloak.token}`;
+};
+
+keycloak.onAuthRefreshSuccess = async function() {
+  client.defaults.headers.common["Authorization"] = `Bearer ${keycloak.token}`;
+};
